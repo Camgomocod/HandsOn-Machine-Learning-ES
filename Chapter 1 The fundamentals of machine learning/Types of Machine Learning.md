@@ -17,12 +17,14 @@ Los sistemas de ML pueden ser clasificados según la cantidad y el tipo de super
 
 En el entrenamiento supervisado lo que se hace es que con el data set que se da de alimento para el algoritmo incluye la solución deseada, llamada label. 
 
+![Figura 1-5](/assets/chapter1/Pasted%20image%2020250225102910.png)
 ![[Pasted image 20250225102910.png]]
 
 Un ejemplo típico de entrenamiento supervisado es classification. El modelo es entrenado con muchos ejemplos de corres a lo largo de su clase (spam or not), y este debe aprender a como clasificar estos correos. Otra tarea típica es target numerical value, como el precio de un carro, a partir de unas características dadas. (millas, año, marca etc) llamados predictors. Esa lista de tareas es llamada Regression. Para entrenar el sistema hay que darle muchos ejemplos de carros incluidos las labels y los predictors.
 
 *Note* algunos regression algorithms pueden ser usados para classification, y vise versa. Por ejemplo modelos de Logistic Regression pueden ser usados para clasificar, según el valor de salida corresponda a la probabilidad de pertenecer a una clase dada (e,f 20% chance of spam)
 
+![Figura 1-6](/assets/chapter1/Pasted%20image%2020250225103531.png)
 ![[Pasted image 20250225103531.png]]
 
 Algunos de los algoritmos más importantes para supervised learning son los siguientes: 
@@ -38,6 +40,7 @@ Algunos de los algoritmos más importantes para supervised learning son los sigu
 
 Para este tipo de modelo los datos están sin clasificar unlabeled. El sistema intenta aprender sin ningún profesor 
 
+![Figura 1-7](/assets/chapter1/Pasted%20image%2020250225103819.png)
 ![[Pasted image 20250225103819.png]]
 
 Estos son algunos de los algoritmos más importantes para unsupervised learning: 
@@ -60,10 +63,12 @@ Estos son algunos de los algoritmos más importantes para unsupervised learning:
 
 Un ejemplo puede ser para analizar los visitas de un blog para hacer clustering de las diferentes clasificaciones que se pueden formar entre ellos, por ejemplo un 40% son mujeres que le gustan los comics y generalmente leen el blog en la mañana. mientras que 20% son hombres que le gustan historias románticas durante los fines de semana. Si se usa hierarchical clustering, se pude subdividir esos grupos en más pequeños, esto puedo ayudar a hacer Posts para cada grupo. 
 
+![Figura 1-8](/assets/chapter1/Pasted%20image%2020250225104554.png)
 ![[Pasted image 20250225104554.png]]
 
 Visualization algorithms son también buenos ejemplos de entrenamiento sin supervisión. Se los alimenta con muchos datos complicados sin label, y ellos tienen un 2d o 3d representación de los datos que fácilmente pueden ser graficados. Estos algoritmos intentan preservar la estructura tanto como puedan (tratando de separar por clusters en el espacio de salida para mapear una visualización) así podemos entender como los datos están siendo organizados, para talvez identificar patrones que no han tenido en cuenta. 
 
+![Figura 1-9](/assets/chapter1/Pasted%20image%2020250225104938.png)
 ![[Pasted image 20250225104938.png]]
 
 Una tarea relacionada es dimensionality reduction, el cual es el objetivo de simplificar los datos sin perder demasiada información. Una de las formas de hacer esto es unir unir algunas de las características en una. Por ejemplo el kilometraje esta fuertemente relacionado con el año, así que la reducción de dimensionalidad unirá usas dos una una sola feature (característica) que represente el desgaste del carro. Esto es llamado feature extraction. 
@@ -72,6 +77,7 @@ Una tarea relacionada es dimensionality reduction, el cual es el objetivo de sim
 
 Otra de las tareas importantes en unsupervised learning es anomaly detection. Por ejemplo detectar transacciones fraudulentas de tarjetas de crédito para prevenirlos, detectando defectos de mano factura, o automáticamente removiendo outliers (valores atípicos) antes de usar ese dataset para entrenamiento. Por lo los data set se muestran normales por lo que hay que aprender a reconocerlos, para que después en nuevas instancias pueda detectarlo como normal o anomalía 
 
+![figura 1-10](/assets/chapter1/Pasted%20image%2020250225111445.png)
 ![[Pasted image 20250225111445.png]]
 
 Otra tarea para unsupervised es en association rule learning, el propósito es excavar entre grandes cantidades de datos para descubrir relaciones interesantes entre atributos. Por ejemplo suponga un super mercado. Running an association rule en las ventas puede revelar que las personas que compran salsa barbecue y papas tienen la tendencia a comprar chuletas. Esto es interesante para colocar esos items cerca entre si. 
@@ -80,6 +86,7 @@ Otra tarea para unsupervised es en association rule learning, el propósito es e
 
 Desde que etiquetar datos es usualmente costoso en tiempo y dinero, a menudo se tiene muchas instancias sin etiquetar, y pocas etiquetadas. Algunos algoritmos pueden lidiar con datos que están parcialmente etiquetados. Esto es llamado semi supervised learning. 
 
+![Figura 1-11](/assets/chapter1/Pasted%20image%2020250225112124.png)
 ![[Pasted image 20250225112124.png]]
 
 Algunos photo-hosting services, como google photos, son buenos ejemplos de esto. Una vez que se suba una foto familiar al servicio, este automáticamente reconoce que una persona esta en una foto C, H y otra persona en H y E. Esto es la parte unsupervised learning (clustering). Ahora el sistema necesita del usuario para darle un nombre a dichas personas. Agregando el nombre por persona el servicio ahora será capaz de nombrarlo en todas las fotos que aparezca, que es muy util para buscar fotos. 
@@ -88,6 +95,7 @@ Algunos photo-hosting services, como google photos, son buenos ejemplos de esto.
 
 Este caso es bastante diferente. El sistema de aprendizaje llamado agent en este contexto, puede observar su entorno, seleccionar y realizar acciones, y al agente tiene recompensas o penalidades de regreso. Este debe entender por el mismo cual es la mejor estrategia, llamada policy, para obtener la mayor cantidad de recompensas a lo largo del tiempo. A policy define que acción el agente debe tomar dada una situación. 
 
+![Figura 1-12](/assets/chapter1/Pasted%20image%2020250225113041.png)
 ![[Pasted image 20250225113041.png]]
 
 ### Batch and Online Learning 
