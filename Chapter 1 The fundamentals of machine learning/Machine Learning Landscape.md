@@ -5,7 +5,7 @@
 
 Un ejemplo general que propone el libro lo hace sobre el tema de correos de SPAM, propone un ejemplo inicial de como clasificar estos correos usando una programación tradicional, determinando reglas y patrones. El proceso que sigue ese proceso es el siguiente.
 
-![Figure 1-1. Enfoque tradicional](/assets/chapter1/Pasted image 20250225095754.png)
+![Figure 1-1. Enfoque tradicional](/assets/chapter1/Pasted%20image%2020250225095754.png)
 
 ![[Pasted image 20250225095754.png]]
 
