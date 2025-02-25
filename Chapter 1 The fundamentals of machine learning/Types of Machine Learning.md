@@ -1,7 +1,7 @@
 # Types of Machine Learning
 
 **Creación:** 2025-02-25 10:19
-[[Hans On]]
+[[Chapter 1 The fundamentals of machine learning]]
 
 - Si están supervisados por humanos. (supervised, unsupervised, semi supervised, and Reinforcement learning)
 - Si pueden o no aprender de forma incremental sobre la marcha (online versus batch (lote) learning)
