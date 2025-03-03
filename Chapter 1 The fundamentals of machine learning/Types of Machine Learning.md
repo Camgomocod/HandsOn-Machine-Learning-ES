@@ -208,3 +208,90 @@ Tu sistema solo será capaz de aprender si los datos de entrenamiento contienen 
 
 ### Over fitting training data
 
+Esto quiere decir el el modelo funciona bien con los datos de entrenamiento, pero no logra generalizar correctamente. El siguiente ejemplo muestra un gran sobreajuste sobre los datos de entrenamiento. Este funciona mejor sobre los datos de entrenamiento que uno de regresión lineal, pero no se puede confiar en las predicciones.
+
+![[Pasted image 20250301175347.png]]
+
+Modelos complejos como redes neuronales profundas pueden detectar patrones subyacentes en los datos, pero si el conjunto de datos tiene ruido, o es muy pequeño (lo que introduce ruido de muestreo), entonces el modelo tiene la tendencia en detectar patrones en el ruido como tal, obviamente esos patrones no se generalizarán en nuevas instancias de entrenamiento. Por ejemplo digamos que se alimenta nuestro modelo de satisfacción de vida con muchos mas atributos, incluyendo algunos que no tienen información relevante para el modelo como el nombre del país. un modelo complejo puede detectar patrones como el hecho de que todos los países del data set que contienen la letra w en sus nombres tienen una satisfacción mayor a 7. Cuanta es la confianza que esa regla aplique a países como Rwanda o Zimbabwe.  Obviamente este apron ocurre en el data set por pura casualidad, pero el modelo no tiene como distinguir si el patron es real o simplemente ruido. 
+
+>[!Note] Overfitting (sobre ajuste) ocurre cuando el modelo es demasiado complejo con relación a los ruidos que tiene los datos de entrenamiento. Estas son posibles soluciones: 
+>- Simplificar el modelo seleccionando alguno que tenga menos parámetros (linear model más que un high-degree polynomial model) reduciendo el número de atributos en los datos de entrenamiento o restringiendo el modelo
+>- Recolectar más datos de entrenamiento 
+>- Reducir el ruido en los datos de entrenamiento (arreglando los errores en los datos y removiendo las desviadores *outliers* (valores atípicos))
+
+Restringiendo el modelo a uno más simple puede reducir el riego de sobre ajuste is llamado *regularization*. Por ejemplo en un modelo de regresión lineal se tiene dos atributos el bias y height, la pendiente y el intercepto, se puede restringir alguno de los dos parámetros para trabajar con alguno de los dos, o se puede hacer que uno de los dos atributos como la pendiente crezca con mesura para regularizar el modelo. 
+
+En el siguiente ejemplo se puede ver un modelo con regularización, forzando al modelo a tener una menor pendiente, este modelo no se ajusta a los datos de entrenamiento (círculos) tan bien como el primer modelo, pero en realidad hace una mejor generalización con los nuevos ejemplos que no se ven durante el entrenamiento (cuadrados). 
+
+![[Pasted image 20250301181004.png]]
+
+La cantidad de regularización que se aplique durante el entrenamiento puede ser controlada por un *hyper parameter*. Esto es un parámetro del aprendizaje del algoritmo (no del modelo). Como tal, no se ve afectado por el aprendizaje del algoritmo como tal, debe ser establecido antes del entrenamiento y permanece constante durante. Si se configura el hiper parámetro a un valor muy grande, obtendrá un modelo casi plano (una pendiente cercana a cero); Es casi seguro que el modelo no se ajustará demasiado a los datos de entrenamiento, será menos probable que encuentre una buena solución. Ajustar los hiper parámetros es una parte importante durante la construcción de un sistema de aprendizaje automático.
+
+### Underfitting the Training data 
+
+Underfitting (desajuste) es el contrario a overfitting;  esto ocurre cuando tu modelo es muy simple para aprender la estructura subyacente de los datos. Por ejemplo un modelo de regresión lineal tiene la tendencia a un desajuste; la realidad es mucho más complejo que el modelo, así que las predicciones que realizará serán inexactas. Incluso con los datos de entrenamiento. 
+
+Aquí están algunas de las opciones principales para arreglar este problema: 
+
+- Seleccionar un modelo más poderoso 
+- Alimentar con mejores características al algoritmo de aprendizaje (*feature engineering*)
+- Reduciendo las restricciones del modelo ( reducir la regularización (*hyper-parameter*))
+
+## Testing and validating 
+
+La única manera en la que se puede saber que tan bien un modelo generalizará con los nuevos casos en realidad es intentar con nuevos casos. Una forma de hacer eso es poner el modelo en producción y monitorear que tan bien rinde. Esto funciona bien, si tu modelo es horriblemente malo, tus usuarios se quejaran - no es la mejor idea. 
+
+La mejor opción es dividir los datos en dos lotes: Un *training set* (datos de entrenamiento) y un *test set* (lote de prueba), El error en los nuevos casos es llamado *generalization error* (error de generalización) , y evaluando tu modelo en los datos de prueba, puedes estimar ese error. Este valor te dice que tan bien tu modelo rinde en instancias que nunca a visto antes. 
+
+Si el error de entrenamiento es bajo (tu modelo comete pequeños errores sobre los datos de entrenamiento) pero la generalización es alta, esto quiere decir que tu modelo esta sobre ajustado con los datos de entrenamiento.
+
+>[!tip] Es común un uso del 80% de los datos para entrenamiento y mantener un 20% para los tests. Sin embargo esto depende del tamaño del dataset: Si este contiene 10 millones de instancias, el mantener 1% de los datos contendrá 100.000 instancias, probablemente más que suficiente para una buena estimación del error de generalización
+
+### Hyperparameter tuning and model selection
+
+Evaluar un modelo es bastante simple: solo usa el set de prueba, Pero supongamos que estas dudando entre dos tipos de modelos (linear regression y polinomial regression): como se puede decidir entre ellos? Una de las opciones es entrenar los dos para comparar como de bien generalizan usando el test set. 
+
+Ahora supone que el modelo de regresión lineal generaliza mejor, pero quieres aplicar algunas regularizaciones para prevenir el sobreajuste. La pregunta es como se escoge el valor de la regularization hyperparameter? Una de las opciones es entrenar 100 modelos diferentes usando 100 valores diferentes para el hyperparameter. Suponga que encuentra el mejor de ellos que produce un modelo con el menor error en la generalización 5%. Despliegas este modelo a producción, pero infortunadamente no rinde tan bien como se espera, produciendo 15% de errores. Que paso? 
+
+El problema es que se midió el error de generalización multiples veces en el conjunto de prueba, y se adapto el modelo y los hyperparameters para producir el mejor modelo para un conjunto de datos particular. Esto quiere decir que el modelo no tendrá tan buen rendimiento con datos nuevos. 
+
+Una solución común a esto es llamada *holdout validation* (validación de retención): simplemente se aparta parte del set de entrenamiento para evaluar varios modelos candidatos y seleccionar el mejor. El nuevo held-out set is llamado *validation set* (conjunto de validación) (o algunos veces el set de desarrollo) Específicamente se entrena varios modelos con varios hyperparameters en el set de entrenamiento reducido. (todo el set de entrenamiento menos el set de validación), y se selecciona el modelo que mejor rinda en el conjunto de validación. Después de esta retención de el proceso de validación, se entrena el modelo con todo el set de entrenamiento (incluyendo el set de validación), y esto te da el modelo final. Por ultimo, tu evalúas el modelo final en el set de prueba para estimar el error de generalización. 
+
+Esta solución suele funcionar bastante bien. Sin embargo, si el set de validación es muy pequeño, entonces las evaluaciones del modelo serán imprecisas, tu podrías terminar escogiendo un sub optimo modelo por error. En cambio, si el set de validación es muy grande, el set entrenamiento será mucho más pequeño que el set de entrenamiento completo. Porqué esto es malo? Bien, desde que el modelo final será entrenado con el tamaño completo del set. Eso sería como escoger a un velocista para un maratón. Una forma de resolver este problema es realizar repeticiones *cross-validation* (validación cruzada), usando muchos pequeños sets de validación. Cada modelo es evaluado por cada set de validación después es entrenado con el resto de los datos. Al promediar todas esas evaluaciones del modelo, tu puedes obtener una cifra mucho más precisa de su rendimiento. Sin embargo, hay un inconveniente. El tiempo de entrenamiento es multiplicado por el número de sets de validación. 
+
+### Data mismatch 
+
+En algunos casos es fácil conseguir grandes cantidades de datos de entrenamiento, pero estos datos probablemente no serán perfectamente representativas de los datos que serán usados en producción. Por ejemplo, suponga que quieres crear una app para hacer fotos de flores y que automáticamente determine cual especie es. Tu fácilmente puedes descargar millones de fotos de la web, pero esas no será perfectamente representativas de las fotos que en verdad van a ser tomadas usando un dispositivo móvil. Talvez tu solo tendrás 10,000 fotos representativas (las que son tomadas por la app). En este caso la regla más importante es que el set de validación y el de entrenamiento deben ser lo más representativos como sea posible de los datos que se espera en el uso de producción, así que estos deben estar compuestos exclusivamente de datos representativos. Se los puede mezclar colocando la mitad en el set de entrenamiento y otra parte en el de validación (estando seguro que duplicados (o muy parecidos) terminen en ambos sets) pero después de entrenar tu modelo con las fotos de la web, si observas que el rendimiento del modelo en el set de validación es decepcionante. Tu no sabrás si esto se debe a que tu modelo se ha sobre ajustado al conjunto de entrenamiento.
+o si esto es solamente un desajuste entre los fotos de la web y las fotos tomadas desde la app móvil. Una solución es mantener algo de las fotos de entrenamiento (de la web) en otro conjunto que Andre Ng llama el set *train-dev* después que el modelo es entrenado (en el set de entrenamiento, no en train-dev set) , puedes evaluarlo con el train-dev set. Si este rinde bien, el modelo no esta sobre ajustado (overfitting) para los datos de entrenamiento. Si este rindo pobremente en el set de validación, el problema puede venir de el desajuste de los datos (data mismatch).  Puedes tratar de abordar este problema procesando las imágenes de la web para que parezcan más a las que serían tomadas por la app, y luego re entrenar el modelo. En cambio, si el model rinde pobremente en el train-dev set, este debería estar sobre ajustado en el set de entrenamiento, así que deberías intentar en simplificar o regularizar el modelo, obtener más datos de entrenamiento, y limpiar los datos de entrenamiento. 
+
+![[Pasted image 20250303112533.png]]
+
+# Exercises
+
+In this chapter we have covered some of the most important concepts in Machine
+Learning. In the next chapters we will dive deeper and write more code, but before we
+do, make sure you know how to answer the following questions:
+1. How would you define Machine Learning?
+2. Can you name four types of problems where it shines?
+3. What is a labeled training set?
+4. What are the two most common supervised tasks?
+5. Can you name four common unsupervised tasks?
+6. What type of Machine Learning algorithm would you use to allow a robot to
+walk in various unknown terrains?
+7. What type of algorithm would you use to segment your customers into multiple
+groups?
+8. Would you frame the problem of spam detection as a supervised learning problem
+or an unsupervised learning problem?
+9. What is an online learning system?
+10. What is out-of-core learning?
+11. What type of learning algorithm relies on a similarity measure to make predictions?
+12. What is the difference between a model parameter and a learning algorithm’s
+hyperparameter?
+13. What do model-based learning algorithms search for? What is the most common
+strategy they use to succeed? How do they make predictions?
+14. Can you name four of the main challenges in Machine Learning?
+15. If your model performs great on the training data but generalizes poorly to new
+instances, what is happening? Can you name three possible solutions?
+17. What is a test set, and why would you want to use it?
+18. What is the purpose of a validation set?
+19. What is the train-dev set, when do you need it, and how do you use it?
