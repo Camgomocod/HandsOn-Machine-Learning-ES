@@ -73,7 +73,7 @@ Visualization algorithms son también buenos ejemplos de entrenamiento sin super
 
 Una tarea relacionada es dimensionality reduction, el cual es el objetivo de simplificar los datos sin perder demasiada información. Una de las formas de hacer esto es unir unir algunas de las características en una. Por ejemplo el kilometraje esta fuertemente relacionado con el año, así que la reducción de dimensionalidad unirá usas dos una una sola feature (característica) que represente el desgaste del carro. Esto es llamado feature extraction. 
 
->[!Note] Usualmente es buna idea intentar reducir la dimensionalidad de los datos de entrenamiento usando dimensionality reduction algorithm antes de darlo como entrenamiento para otro ML (como supervised training)  eso hará que corra mucho más rápido, tome menos disco en memoria, y en algunos casos que rinda mejor. 
+>[!Note] Usualmente es buena idea intentar reducir la dimensionalidad de los datos de entrenamiento usando dimensionality reduction algorithm antes de darlo como entrenamiento para otro ML (como supervised training)  eso hará que corra mucho más rápido, tome menos disco en memoria, y en algunos casos que rinda mejor. 
 
 Otra de las tareas importantes en unsupervised learning es anomaly detection. Por ejemplo detectar transacciones fraudulentas de tarjetas de crédito para prevenirlos, detectando defectos de mano factura, o automáticamente removiendo outliers (valores atípicos) antes de usar ese dataset para entrenamiento. Por lo los data set se muestran normales por lo que hay que aprender a reconocerlos, para que después en nuevas instancias pueda detectarlo como normal o anomalía 
 
@@ -128,7 +128,7 @@ Los learning algorithms pueden ser usados también para entrenar sistemas con da
 
 >[!Note] Out-of-core learning es usualmente realizado off-line. Se puede ver como un enfoque de aprendizaje incremental. 
 
-Un parámetro importante a tener en cuneta es el como de rápido los online systems pueden adaptarse a los nuevos datos llamado learning rate. Si se configura un ratio alto el sistema se adaptara rápidamente, pero esto genera una tendencia a olvidar los datos anteriores. Por en contrario si se configura un ratio de aprendizaje bajo, el sistema puede tener mayor inercia, eso es que va a aprender lentamente, y también va a ser menos sensible al ruido de los nuevos datos entrantes, o de malos data points que se desborden del comportamiento de los datos. 
+Un parámetro importante a tener en cuenta es el como de rápido los online systems pueden adaptarse a los nuevos datos llamado learning rate. Si se configura un ratio alto el sistema se adaptara rápidamente, pero esto genera una tendencia a olvidar los datos anteriores. Por en contrario si se configura un ratio de aprendizaje bajo, el sistema puede tener mayor inercia, eso es que va a aprender lentamente, y también va a ser menos sensible al ruido de los nuevos datos entrantes, o de malos data points que se desborden del comportamiento de los datos. 
 
 ![Figure 1-14](/assets/capter1/Pasted image 20250228153302.png)
 ![[Pasted image 20250228153302.png]]
@@ -143,11 +143,11 @@ Hay dos principales enfoques de generalización: instance-based learning and mod
 
 ### Instance-based learning
 
-Posiblemente la mas trivial forma de aprendizaje, es simplemente hacerlo por memoria. Si se crea un filtro de spam de esta forma, solo tomaría que se señalar todos los emails que sean idénticos a los señalados por los usuarios- no es la peor solución pero definitivamente no la mejor. 
+Posiblemente la mas trivial forma de aprendizaje, es simplemente hacerlo por memoria. Si se crea un filtro de spam de esta forma, solo tomaría que se señalar todos los emails que sean idénticos a los señalados por los usuarios, no es la peor solución pero definitivamente no la mejor. 
 
-En lugar de señalar a los que sean directamente idénticos se puede tener una cierta mesura programando para señalar a los que también tengan un parentesco. Esto requiere a measure of similarity entre los dos correos.  (como contar el número de palabras que tienen en común).
+En lugar de señalar a los que sean directamente idénticos se puede tener una cierta mesura programando para señalar a los que también tengan un parentesco. Esto requiere a *measure of similarity* entre los dos correos.  (como contar el número de palabras que tienen en común).
 
-Esto es llamado instance based learning el sistema aprende por memoria, nuevo generaliza para nuevos casos usando un sistema de semejanza para comparar con los ejemplos ya aprendidos. 
+Esto es llamado *instance based learning* el sistema aprende por memoria, generaliza para nuevos casos usando un sistema de semejanza para comparar con los ejemplos ya aprendidos. 
 
 ![[Pasted image 20250301151023.png]]
 
@@ -157,7 +157,7 @@ Otra forma de generalizar una pila de ejemplos es construir un modelo de esos ej
 
 ![[Pasted image 20250301151134.png]]
 
-Después de usar el modelo, se necesita tener parámetros para el bias (desvío) y el peso, por ejemplo al usar una regresión lineal que tiene la forma de y(x) = mx + b, donde x serían los parámetros de entrada con los cuales hacer las predicciones de interés. Se necesita especificar una medida de rendimiento para especificarlo. Se puede definir una fitness function que mide como de bueno es el modelo, o se puede definir una función de costo (cost function) esto mide como de mala es. Para problemas de regresión lineal se usa la distancia entre el valor predicho y un valor teórico del data set.  
+Después de usar el modelo, se necesita tener parámetros para el bias (desvío) y el peso, por ejemplo al usar una regresión lineal que tiene la forma de y(x) = mx + b, donde x serían los parámetros de entrada con los cuales hacer las predicciones de interés. Se necesita especificar una medida de rendimiento para especificarlo. Se puede definir una *fitness function* que mide como de bueno es el modelo, o se puede definir una función de costo (cost function) esto mide como de mala es. Para problemas de regresión lineal se usa la distancia entre el valor predicho y un valor teórico del data set.  
 
 En resumen: 
 
@@ -172,7 +172,7 @@ En resumen la tarea principal es escoger un buen algoritmo de aprendizaje y entr
 
 ### Cantidad insuficiente de datos de entrenamiento 
 
-Para que una niña pequeña aprenda lo que una manzana toma, señalarle lo que es una manzana unas cuentas veces y esta será capaz de distinguirlas sin importar el color de las mismas, los ML algorithms no llegan aún a ese punto. Incluso para simples problemas al modelo hay que entrenarlo con grandes cantidades de datos para que aprenda de forma correcta. Y crece el número de datos necesarios con la complejidad del problema, como el reconocimiento de voz. 
+Para que una niña pequeña aprenda lo que es una manzana toma el siguiente proceso, señalarle lo que es una manzana unas cuentas veces y esta será capaz de distinguirlas sin importar el color de las mismas, los ML algorithms no llegan aún a ese punto. Incluso para simples problemas al modelo hay que entrenarlo con grandes cantidades de datos para que aprenda de forma correcta. Y crece el número de datos necesarios con la complejidad del problema, como el reconocimiento de voz. 
 
 ![[Pasted image 20250301152835.png]]
 
@@ -186,12 +186,12 @@ Por ejemplo la lista de países que se uso para el entrenamiento previo pueden s
 
 ![[Pasted image 20250301154000.png]]
 
-Si se entrena un linar model con esos datos se obtendrá una línea solida, mientras que el modelo antiguo es representado por la línea punteada. Como se puede notar el añadir algunos países puede afectar significativamente el comportamiento del modelo, pero esto deja claro que un modelo de regresión lineal nunca va a funcionar bien, parece que los países ricos no lo son tanto como los que lo son los moderados. (de hecho parecen ser infelices), y en cambio algunos países pobres parecen mas felices que muchos de los ricos. 
+Si se entrena un linar model con esos datos se obtendrá una línea solida, mientras que el modelo antiguo es representado por la línea punteada. Como se puede notar el añadir algunos países puede afectar significativamente el comportamiento del modelo, pero esto deja claro que un modelo de regresión lineal nunca va a funcionar bien, parece que los países ricos no son tan felices como los que son moderados. (de hecho parecen ser infelices), y en cambio algunos países pobres parecen mas felices que muchos de los ricos. 
 
 Es clave que el conjunto de entrenamiento sea representativo de los casos que se quiera generalizar. Esto es más complicado de lo que suena: si la muestra es muy pequeña se tendrá *sampling noise* (ruido de muestreo) (datos no representativos resultado del azar), pero incluso las muestras más grandes pueden ser no representativas si el método de muestreo es defectuoso. Esto es llamado *sampling bias* (sesgo de muestra).
 
 ![[Pasted image 20250301154811.png]]
-
+(menciona que se realizo una predicción como medio del resultado de una encuesta que se realizo en una revista, esto hico que tenga ruido de muestreo porque no se tuvo en cuenta el resto de la población, solo se tomo a las personas que se suscribían a las revistas y que tienen dinero (en la época) provocando un resultado errado)
 ### Poor-Quality Data
 
 Obviamente si los datos de entrenamiento esta lleno de errores, *outliers* (valores atípicos) (debido a mediciones de mala calidad), esto hará difícil que el sistema detecto patrones subyacentes, así que el sistema tiene menos tendencia a rendir bien. A menudo es mejor gastar más tiempo limpiando los datos de entrenamiento. La verdad es que la mayoría de científicos de datos gastan la mayor parte de su tiempo haciendo solo eso. Lo siguientes son un par de ejemplos de cuando se quiere hacer una limpieza en los datos. 
@@ -212,14 +212,14 @@ Esto quiere decir el el modelo funciona bien con los datos de entrenamiento, per
 
 ![[Pasted image 20250301175347.png]]
 
-Modelos complejos como redes neuronales profundas pueden detectar patrones subyacentes en los datos, pero si el conjunto de datos tiene ruido, o es muy pequeño (lo que introduce ruido de muestreo), entonces el modelo tiene la tendencia en detectar patrones en el ruido como tal, obviamente esos patrones no se generalizarán en nuevas instancias de entrenamiento. Por ejemplo digamos que se alimenta nuestro modelo de satisfacción de vida con muchos mas atributos, incluyendo algunos que no tienen información relevante para el modelo como el nombre del país. un modelo complejo puede detectar patrones como el hecho de que todos los países del data set que contienen la letra w en sus nombres tienen una satisfacción mayor a 7. Cuanta es la confianza que esa regla aplique a países como Rwanda o Zimbabwe.  Obviamente este apron ocurre en el data set por pura casualidad, pero el modelo no tiene como distinguir si el patron es real o simplemente ruido. 
+Modelos complejos como redes neuronales profundas pueden detectar patrones subyacentes en los datos, pero si el conjunto de datos tiene ruido, o es muy pequeño (lo que introduce ruido de muestreo), entonces el modelo tiene la tendencia en detectar patrones en el ruido como tal, obviamente esos patrones no se generalizarán en nuevas instancias de entrenamiento. Por ejemplo digamos que se alimenta nuestro modelo de satisfacción de vida con muchos mas atributos, incluyendo algunos que no tienen información relevante para el modelo como el nombre del país. un modelo complejo puede detectar patrones como el hecho de que todos los países del data set que contienen la letra w en sus nombres tienen una satisfacción mayor a 7. Cuanta es la confianza que esa regla aplique a países como Rwanda o Zimbabwe.  Obviamente este patron ocurre en el data set por pura casualidad, pero el modelo no tiene como distinguir si el patron es real o simplemente ruido. 
 
 >[!Note] Overfitting (sobre ajuste) ocurre cuando el modelo es demasiado complejo con relación a los ruidos que tiene los datos de entrenamiento. Estas son posibles soluciones: 
 >- Simplificar el modelo seleccionando alguno que tenga menos parámetros (linear model más que un high-degree polynomial model) reduciendo el número de atributos en los datos de entrenamiento o restringiendo el modelo
 >- Recolectar más datos de entrenamiento 
 >- Reducir el ruido en los datos de entrenamiento (arreglando los errores en los datos y removiendo las desviadores *outliers* (valores atípicos))
 
-Restringiendo el modelo a uno más simple puede reducir el riego de sobre ajuste is llamado *regularization*. Por ejemplo en un modelo de regresión lineal se tiene dos atributos el bias y height, la pendiente y el intercepto, se puede restringir alguno de los dos parámetros para trabajar con alguno de los dos, o se puede hacer que uno de los dos atributos como la pendiente crezca con mesura para regularizar el modelo. 
+Restringiendo el modelo a uno más simple puede reducir el riego de sobre ajuste es llamado *regularization*. Por ejemplo en un modelo de regresión lineal se tiene dos atributos el bias y height, la pendiente y el intercepto, se puede restringir alguno de los dos parámetros para trabajar con alguno de los dos, o se puede hacer que uno de los dos atributos como la pendiente crezca con mesura para regularizar el modelo. 
 
 En el siguiente ejemplo se puede ver un modelo con regularización, forzando al modelo a tener una menor pendiente, este modelo no se ajusta a los datos de entrenamiento (círculos) tan bien como el primer modelo, pero en realidad hace una mejor generalización con los nuevos ejemplos que no se ven durante el entrenamiento (cuadrados). 
 
@@ -237,7 +237,7 @@ Aquí están algunas de las opciones principales para arreglar este problema:
 - Alimentar con mejores características al algoritmo de aprendizaje (*feature engineering*)
 - Reduciendo las restricciones del modelo ( reducir la regularización (*hyper-parameter*))
 
-## Testing and validating 
+	## Testing and validating 
 
 La única manera en la que se puede saber que tan bien un modelo generalizará con los nuevos casos en realidad es intentar con nuevos casos. Una forma de hacer eso es poner el modelo en producción y monitorear que tan bien rinde. Esto funciona bien, si tu modelo es horriblemente malo, tus usuarios se quejaran - no es la mejor idea. 
 
@@ -272,26 +272,56 @@ In this chapter we have covered some of the most important concepts in Machine
 Learning. In the next chapters we will dive deeper and write more code, but before we
 do, make sure you know how to answer the following questions:
 1. How would you define Machine Learning?
+Es la forma en que las maquinas pueden aprender a realizar ciertas tareas, donde se lo puede hacer por model (haciendo relaciones matemáticas entre los datos) o instance que lo hace por memoria
 2. Can you name four types of problems where it shines?
+Haciendo predicciones de tendencia, puede ser también en traducir textos, en hacer que robots realicen tareas concretas mediante entrenamiento, entrenar bots para juegos, analizar datos, minar datos.
 3. What is a labeled training set?
+Se usa cuando para entrenamiento supervisado o semi supervisado, se tiene los datos con el resultado correcta a los que se quiere llegar con la inferencia en el despliegue o en la generalización cuando se pone a prueba el modelo.
 4. What are the two most common supervised tasks?
-5. Can you name four common unsupervised tasks?
-6. What type of Machine Learning algorithm would you use to allow a robot to
+- Classification 
+- Linear regression
+- Polynomial regression
+- k-neigh rest neighbors 
+- Support vector machines 
+- Neuronal networks 
+1. Can you name four common unsupervised tasks?
+- Clustering
+- Visualization and and data reduction 
+- Anomaly and novelty detection 
+- Associative data
+1. What type of Machine Learning algorithm would you use to allow a robot to
 walk in various unknown terrains?
-7. What type of algorithm would you use to segment your customers into multiple
+Reinforcement learning
+2. What type of algorithm would you use to segment your customers into multiple
 groups?
-8. Would you frame the problem of spam detection as a supervised learning problem
+Clustering
+3. Would you frame the problem of spam detection as a supervised learning problem
 or an unsupervised learning problem?
-9. What is an online learning system?
-10. What is out-of-core learning?
-11. What type of learning algorithm relies on a similarity measure to make predictions?
-12. What is the difference between a model parameter and a learning algorithm’s
+Supervised
+4. What is an online learning system?
+Cuando se tiene un modelo que tiene un modelo el cual se necesita actualizar su entrenamiento constante, porque recibe datos. Lo que se hace es que se entrena el modelo periódicamente según el learning rate que se tenga, es decir se tiene el modelo entrenado y se suma los datos que vayan llegando para ser entrenados con ellos, esto hace que el procedimiento de entrenamiento sea menos costoso a nivel computacional y de tiempo, pero el modelo tiene una tendencia a olvidar los primeros patrones que aprendió.   
+5. What is out-of-core learning?
+Es cuando se entrena el modelo offline pero el data set es muy grande para ser entrenado en una sola tirada, ya sea por los recursos computacionales, o que no se tiene suficiente espacio para esos datos, lo que se hace es que se parte en lotes el data set y se va entrenando progresivamente lote a lote, esto hace que sea menos costoso en computo y se salva espacio porque según se vaya usando esos lotes no serían útiles, a excepción que se quiera restaurar algún data point. 
+6. What type of learning algorithm relies on a similarity measure to make predictions?
+instance-based 
+7. What is the difference between a model parameter and a learning algorithm’s
 hyperparameter?
-13. What do model-based learning algorithms search for? What is the most common
+Los model parameter son los datos con el que el modelo trabaja, estos se van graduando según vaya procesando los datos, puede ser en regresión lineal el bias y el weight, por otro lado los hyperparameter es un parámetro que se define antes del proceso de entrenamiento para que el modelo no se sobre ajuste sobre los datos, para influir en ese proceso de aprendizaje. 
+8. What do model-based learning algorithms search for? What is the most common
 strategy they use to succeed? How do they make predictions?
-14. Can you name four of the main challenges in Machine Learning?
-15. If your model performs great on the training data but generalizes poorly to new
+Buscan hacer una generalización lo más cercana a los valores teóricos, teniendo un modelo no solo que rinda bien en las fases de prueba si no que realize buenas inferencias en el despliegue. 
+9. Can you name four of the main challenges in Machine Learning?
+- Not representative data 
+- Not enough quantity data  
+- Irrelevant features 
+- Overfitting 
+- Underfitting 
+8. If your model performs great on the training data but generalizes poorly to new
 instances, what is happening? Can you name three possible solutions?
-17. What is a test set, and why would you want to use it?
-18. What is the purpose of a validation set?
-19. What is the train-dev set, when do you need it, and how do you use it?
+Esto se debe que hay overfitting, se tiene el modelo muy ajustado a los datos de entrenamiento, por eso rinde bien con esos datos pero no generaliza correctamente. Una puede ser seleccionar un modelo más complejo que realize relaciones más complejas entre los datos, otra puede ser data reduction, fusionando características o seleccionando mejores, o puede ser escoger un mejor hyperparameter para que no haya sobre ajuste, mediante alguna de las formas para hacerlo que vimos anteriormente.
+9. What is a test set, and why would you want to use it?
+el test set se usa para realizar métricas de rendimiento usando una fitness function para comparar el valor teórico con el que generaliza, esto nos da una forma de medir que tan bien el modelo rinde con los datos de entrenamiento, así podemos usar otros enfoques para mejorar su rendimiento 
+10. What is the purpose of a validation set?
+Es seleccionar un hyperparameter que no se sobre ajuste sobre los datos de entrenamiento, así que no haya overfitting y pueda realizar buenas generalizaciones y una inferencia adecuada para cuando se despliegue el modelo. En cross validation cumple otra función. 
+11. What is the train-dev set, when do you need it, and how do you use it?
+el train-dev set es una porción del data set con datos no representativos. Se usa para ver si el modelo presenta data-miss match es decir no generaliza bien con los datos objetivo del modelo. Si el modelo funciona bien en el train-set y en el train-dev set pero no en el val-set esto quiere decir que hay data miss match los datos no son representativos con el objetivo de la generalización entonces se busca limpiar esos datos para que sean lo más parecidos a los que se tomarían en despliegue. 
